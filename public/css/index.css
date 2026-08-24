@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import url("./../public/css/fonts");
+
+@theme {
+  --font-IRANSansX: "IRANSansX";
+
+  --breakpoint-*:initial;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+body {
+  @apply font-IRANSansX! min-h-dvh overflow-x-hidden;
+}
+
+.auth-input {
+  @apply text-sm px-4 mt-2 outline-none focus-within:ring-2 ring-blue-500/40 duration-150 h-10 w-full bg-[#ffffff] border border-neutral-200 rounded-md
+}
+
+@utility flex-ic {
+  @apply flex items-center;
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility flex-between {
+  @apply flex-ic justify-between
+}
+
+@utility container {
+  @apply w-[90%] md:w-full mx-auto
+}
+
+
+::placeholder {
+  @apply text-xs! text-neutral-400!
+}
+
+.contact-input-field {
+  @apply h-10 rounded-md border text-sm border-neutral-200 ring-offset-2 px-4 duration-150 focus-within:ring-4 ring-sky-400/40 focus-within:outline-none
+}
+
+button {
+  @apply cursor-pointer transition-all duration-150 hover:opacity-90 focus-within:ring-2 rounded-md
+}
+
+input {
+  @apply outline-none duration-150 placeholder:text-sm placeholder:text-slate-300 placeholder:font-light focus-within:ring-3 ring-blue-500/40 px-4 text-sm
+}
+
+textarea {
+  @apply outline-none duration-150 placeholder:text-sm pt-2 placeholder:text-slate-300 placeholder:font-light focus-within:ring-3 ring-blue-500/40 px-2 text-sm
+}
+
+.sidebar-header {
+  @apply h-16 font-bold text-zinc-600 border-b border-zinc-200 flex items-center justify-center;
+}
+
+@utility primary-border {
+  @apply border border-zinc-200;
+}
+
+@utility primary-border-b {
+  @apply border-b border-zinc-200;
+}
+
+@utility primary-border-l {
+  @apply border-l border-zinc-200;
+}
+
+@utility primary-border-r {
+  @apply border-r border-zinc-200;
+}
+
+@utility primary-border-t {
+  @apply border-t border-zinc-200;
+}
+
+.search-button {
+  @apply absolute text-xs left-1.5 px-4 py-2.5 rounded-md z-10 duration-150 hover:opacity-90 bg-blue-500 text-white flex items-center justify-center gap-1.5 focus:ring-3 ring-sky-500/40;
+}
+
+.hide-dropdown {
+  @apply invisible opacity-0;
+}
+
+.user-order-card {
+  @apply h-58  w-full rounded-md transition-all duration-150 primary-border overflow-hidden p-2 relative hover:bg-zinc-50 flex items-start gap-10;
+
+  .product-image {
+    @apply size-24 *:duration-500 group-hover:*:scale-90 flex items-center justify-center;
+  }
+
+  .content {
+    @apply grow flex items-center justify-between h-full! p-2;
+  }
+}
+
+.language-dropdown {
+  @apply transition-all duration-300 *:px-4 z-0 shadow-lg p-2 primary-border rounded-md *:flex *:items-center *:gap-1.5 *:text-sm font-normal! *:duration-150 *:transition-all *:hover:bg-zinc-100 top-[110%] absolute w-[150px] *:w-full! *:py-2 *:justify-between *:rounded-md bg-white!;
+}
+
+.menu-opened {
+  @apply opacity-100 visible;
+}
+
+label {
+  @apply text-xs select-none cursor-pointer text-zinc-500 relative after:content-[":"];
+
+  &:hover + input {
+    @apply ring-3 ring-offset-2 ring-blue-500/20;
+  }
+
+  & + input {
+    @apply duration-150 transition-all
+  }
+}
