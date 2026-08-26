@@ -3,6 +3,8 @@ const InputField = ({
   onChange,
   fullWidth,
   placeholder,
+  value,
+  name,
   type = "text",
 }) => {
   const cardClassName = "*:block w-full space-y-2.5 ".concat(
@@ -19,12 +21,14 @@ const InputField = ({
         {label}:
       </label>
       <input
+        value={value}
         type={type}
         placeholder={
           placeholder ? placeholder : "لطفا این فیلد را تکمیل بفرمایید."
         }
         id={uniqueID}
         onChange={onChange}
+        name={name}
         className="contact-input-field"
       />
     </div>
