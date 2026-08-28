@@ -3,6 +3,7 @@ import SectionTitle from "../Components/Common/SectionTitle";
 import InputField from "../Components/Templates/ContactUS/InputField";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 const ContactUSPage = () => {
 
@@ -24,7 +25,7 @@ const ContactUSPage = () => {
       const res = await axios.post("https://shopino.iran.liara.run/v1/contact-us" , form);
 
       if(res.data.status === 201){
-        alert("تیکت شما با موفقیت ثبت شد");
+        toast.success("پیام شما با موفقیت ارسال شد . در اسرع وقت با شما تماس حاصل خواهیم کرد")
       }
 
       console.log(res);
