@@ -6,33 +6,41 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const ContactUSPage = () => {
-
-  const [form , setForm] = useState({
+  const [form, setForm] = useState({
     name: "",
     phone: "",
     subject: "",
-    content : "",
+    content: "",
   });
 
   const changeHandler = (e) => {
-    setForm((prev) => ({...prev, [e.target.name]: e.target.value}));
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const submitHandler =async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    try{
-      const res = await axios.post("https://shopino.iran.liara.run/v1/contact-us" , form);
+    const response = axios.post(
+      "https://shopino.iran.liara.run/v1/contact-us",
+      form,
+    );
 
-      if(res.data.status === 201){
-        toast.success("پیام شما با موفقیت ارسال شد . در اسرع وقت با شما تماس حاصل خواهیم کرد")
+    toast.promise(response, {
+      loading: "درحال ارسال پیام ...",
+      success: () => {
+        setForm({
+          name: "",
+          phone: "",
+          subject: "",
+          content: "",
+        });
+        return "پیام شما با موفقیت ارسال شد . در اسرع وقت با شما تماس حاصل خواهیم کرد";
+      },
+      error: (error)=>{
+        return error.response?.data?.message || "ارسال پیام با شکست مواجه شد";
       }
-
-      console.log(res);
-    }catch(error){
-      console.log(error.response.data.message);
-    }
-  }
+    });
+  };
 
   return (
     <main className="my-20 container" id="contact-us">
@@ -58,16 +66,18 @@ const ContactUSPage = () => {
               placeholder="مثال: امین سعیدی"
               label="نام و نام خانوادگی"
             />
-            <InputField 
+            <InputField
               value={form.phone}
               onChange={changeHandler}
               name="phone"
-              placeholder="مثال: 09911871596" label="شماره موبایل" />
+              placeholder="مثال: 09911871596"
+              label="شماره موبایل"
+            />
 
             <InputField
               value={form.subject}
               onChange={changeHandler}
-              name="subject" 
+              name="subject"
               type="text"
               placeholder="مثال: مرجوع کردن محصول"
               fullWidth
@@ -84,7 +94,7 @@ const ContactUSPage = () => {
               <textarea
                 value={form.content}
                 onChange={changeHandler}
-                name="content" 
+                name="content"
                 id="contact-message"
                 className="h-10 rounded-md mt-2.5 border text-sm py-4 min-h-[140px] border-neutral-200 ring-offset-2 px-4 duration-150 focus-within:ring-4 ring-sky-400/40 focus-within:outline-none"
                 placeholder="مثال: قصد مرجوعی محصول با شناسه #124214 را دارم"
@@ -97,9 +107,11 @@ const ContactUSPage = () => {
               انصراف
             </Link>
 
-            <button className=" bg-linear-to-t from-blue-600 px-4 py-2.5 rounded-md text-white cursor-pointer hover:opacity-90
-            focus-within:ring-4 ring-sky-300/50 ring-offset-2 duration-150 to-blue-400 max-w-max " 
-            onClick={submitHandler}>
+            <button
+              className=" bg-linear-to-t from-blue-600 px-4 py-2.5 rounded-md text-white cursor-pointer hover:opacity-90
+            focus-within:ring-4 ring-sky-300/50 ring-offset-2 duration-150 to-blue-400 max-w-max "
+              onClick={submitHandler}
+            >
               ثبت و ارسال
             </button>
           </div>
