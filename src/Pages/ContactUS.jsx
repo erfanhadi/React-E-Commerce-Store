@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { contactUsSchema } from "../validators/contactus";
+import { validate } from "../validators";
 
 const ContactUSPage = () => {
   const [form, setForm] = useState({
@@ -23,12 +24,7 @@ const ContactUSPage = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const result = contactUsSchema.safeParse(form);
-    
-    if (!result.success){
-      console.log(result.error.issues[0].message);
-      return false;
-    }
+    if(!validate(contactUsSchema , form)) return;
 
     setIsSubmitting(true);
 
