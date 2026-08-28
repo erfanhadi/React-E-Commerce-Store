@@ -24,9 +24,11 @@ const ContactUSPage = () => {
     e.preventDefault();
 
     const result = contactUsSchema.safeParse(form);
-    console.log(result);
     
-    return;
+    if (!result.success){
+      console.log(result.error.issues[0].message);
+      return false;
+    }
 
     setIsSubmitting(true);
 
