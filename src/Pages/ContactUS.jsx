@@ -4,6 +4,7 @@ import InputField from "../Components/Templates/ContactUS/InputField";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { contactUsSchema } from "../validators/contactus";
 
 const ContactUSPage = () => {
   const [form, setForm] = useState({
@@ -21,6 +22,11 @@ const ContactUSPage = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    const result = contactUsSchema.safeParse(form);
+    console.log(result);
+    
+    return;
 
     setIsSubmitting(true);
 
