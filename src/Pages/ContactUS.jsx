@@ -6,54 +6,15 @@ import axios from "axios";
 import { toast } from "sonner";
 import { contactUsSchema } from "../validators/contactus";
 import { validate } from "../validators";
+import useContactUs from "../lib/Hooks/useContactUs";
 
 const ContactUSPage = () => {
-  const [form, setForm] = useState({
+  const { form, isSubmitting, changeHandler, submitHandler } = useContactUs({
     name: "",
     phone: "",
     subject: "",
     content: "",
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const changeHandler = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
-    if(!validate(contactUsSchema , form)) return;
-
-    setIsSubmitting(true);
-
-    const response = axios.post(
-      "https://shopino.iran.liara.run/v1/contact-us",
-      form,
-    );
-
-    toast.promise(response, {
-      loading: "درحال ارسال پیام ...",
-      success: () => {
-        setForm({
-          name: "",
-          phone: "",
-          subject: "",
-          content: "",
-        });
-
-        setIsSubmitting(false);
-
-        return "پیام شما با موفقیت ارسال شد . در اسرع وقت با شما تماس حاصل خواهیم کرد";
-      },
-      error: (error)=>{
-        setIsSubmitting(false);
-
-        return error.response?.data?.message || "ارسال پیام با شکست مواجه شد";
-      }
-    });
-  };
 
   return (
     <main className="my-20 container" id="contact-us">
@@ -123,12 +84,12 @@ const ContactUSPage = () => {
             <button
               className={` bg-linear-to-t from-blue-600 px-4 py-2.5 rounded-md text-white cursor-pointer hover:opacity-90
             focus-within:ring-4 ring-sky-300/50 ring-offset-2 duration-150 to-blue-400 max-w-max ${
-              isSubmitting ? "opacity-50 cursor-not-allowed": null
+              isSubmitting ? "opacity-50 cursor-not-allowed" : null
             }`}
               onClick={submitHandler}
               disabled={isSubmitting}
             >
-              {isSubmitting? "درحال ارسال...":"ثبت و ارسال"}
+              {isSubmitting ? "درحال ارسال..." : "ثبت و ارسال"}
             </button>
           </div>
         </div>
