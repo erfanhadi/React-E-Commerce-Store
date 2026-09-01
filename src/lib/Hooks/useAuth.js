@@ -1,5 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
+import { validate } from "../../validators/index";
+import { sendOtpSchema,verifyOtpSchema } from "../../validators/auth";
+import * as authService from "../../services/auth.service";
+import { toast } from "sonner";
 
 export const useAuth = () => {
     const [phone , setPhone] = useState("");
@@ -7,15 +11,58 @@ export const useAuth = () => {
     const [isSentOtp , setIsSentOtp] = useState(false);
     const navigate = useNavigate();
 
-    const handlePhoneChange = (e)=>{};
-    const handleOtpChange = (e)=>{};
+    const handlePhoneChange = (e)=>{
+        setPhone(e.target.value);
+    };
 
-    const sendOtp = async ()=>{};
-    const verifyOtp = async ()=>{};
+    const handleOtpChange = (e)=>{
+        setOtp(e.target.value);
+    };
 
-    const login = async ()=>{};
+    const sendOtp = async ()=>{
+        if (!validate(sendOtpSchema, {phone})) return;
+
+        const data = await authService.sendOtp(phone);
+        console.log('[sendOtp]',data);
+
+        setIsSentOtp(true);
+    };
+    const verifyOtp = async ()=>{
+        if (!validate(verifyOtpSchema,{phone ,otp})) return;
+
+        const data = await authService.verifyOtp(phone, otp);
+        console.log('[verifyOtp]',data);
+
+        return data;
+    };
+
+    const login = async ()=>{
+        const data = await verifyOtp();
+
+        if (!data) return;
+
+        //save user token
+
+        toast.success("با موفقیت وارد شدید")
+        //navigate to dashboard
+        navigate("/")
+    };
     
-    const handleSubmit = async (e)=>{};
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+
+        try {
+            if (isSentOtp) {
+                await login();
+            } else {
+                await sendOtp();
+            }
+        } catch (error) {
+            if (error.status === 400) {
+                toast.error("کد نادرست است")
+            }
+        }
+    };
 
     return{
         phone,

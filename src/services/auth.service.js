@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const sentOtp = async (phone) => {
+export const sendOtp = async (phone) => {
     const { data } = await axios.post(
         "https://shopino.iran.liara.run/v1/auth/send",
         { phone },
