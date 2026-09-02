@@ -4,11 +4,13 @@ import { validate } from "../../validators/index";
 import { sendOtpSchema,verifyOtpSchema } from "../../validators/auth";
 import * as authService from "../../services/auth.service";
 import { toast } from "sonner";
+import useCountdown from "./useCountdown";
 
 export const useAuth = () => {
     const [phone , setPhone] = useState("");
     const [otp , setOtp] = useState("");
     const [isSentOtp , setIsSentOtp] = useState(false);
+     const {restart , getFormattedTime , isExpired} = useCountdown(10); //set duration on 10 seconds for test
     const navigate = useNavigate();
 
     const handlePhoneChange = (e)=>{
@@ -26,7 +28,19 @@ export const useAuth = () => {
         console.log('[sendOtp]',data);
 
         setIsSentOtp(true);
+
+        restart();
     };
+
+    const resendOtp = async ()=>{
+        setOtp("");
+        const data = await authService.sendOtp(phone);
+        console.log('[ResendOtp]',data);
+
+        restart();
+        toast.success("کد جدید ارسال شد");
+    };
+
     const verifyOtp = async ()=>{
         if (!validate(verifyOtpSchema,{phone ,otp})) return;
 
@@ -68,6 +82,9 @@ export const useAuth = () => {
         phone,
         otp,
         isSentOtp,
+        isExpired,
+        getFormattedTime,
+        resendOtp,
         handlePhoneChange,
         handleOtpChange,
         handleSubmit

@@ -7,7 +7,7 @@ const useCountdown = (duration = 120)=>{
     useEffect(()=>{
         if(!isRunning) return
 
-        if(isRunning <= 0){
+        if(timeLeft <= 0){
             setIsRunning(false);
             return;
         }
@@ -34,7 +34,10 @@ const useCountdown = (duration = 120)=>{
     return{
         timeLeft,
         isRunning,
+        getFormattedTime,
         isExpired: timeLeft === 0,
         restart,
     }
-}
+};
+
+export default useCountdown;
