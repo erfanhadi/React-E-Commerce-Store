@@ -23,5 +23,11 @@ export const verifyOtp = async (phone , otp) => {
 };
 
 export const getMe = async () => {
-    //code
-}
+    const {data} = await axios.get(
+        "https://shopino.iran.liara.run/v1/auth/me",
+        {
+            withCredentials: true,
+        },
+    );
+    return data;
+};

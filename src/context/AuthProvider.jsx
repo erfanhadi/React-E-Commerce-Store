@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AuthContext from './AuthContext'
 import * as AuthService from "./../services/auth.service"
 
-function AuthProvider(children) {
+function AuthProvider({ children }) {
     const [user , setUser] = useState(null);
     const [isLoading , setIsLoading] = useState(null);
 
@@ -11,9 +11,7 @@ function AuthProvider(children) {
             try {
                 const response = await AuthService.getMe();
 
-                console.log(response);
-
-                //setUser after catch user information response
+                setUser(response.data.user);
             } catch (err) {
                 console.error('[GetMe]' , err);
                 
@@ -21,10 +19,20 @@ function AuthProvider(children) {
             }finally{
                 setIsLoading(false);
             }
-        }
-    });
+        };
 
-    return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>
+        initAuth();
+    } ,[]);
+
+    const Logout = ()=>{
+        //codes
+    };
+
+    const value = {
+        user,isLoading
+    }
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export default AuthProvider
+export default AuthProvider;
