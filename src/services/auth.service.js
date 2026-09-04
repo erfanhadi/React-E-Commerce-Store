@@ -14,6 +14,9 @@ export const verifyOtp = async (phone , otp) => {
     const { data } = await axios.post(
         "https://shopino.iran.liara.run/v1/auth/verify",
         { phone , otp ,isSeller: false },
+        {
+            withCredentials: true,
+        },
     );
 
     return data;
