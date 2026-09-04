@@ -11,7 +11,7 @@ export const useAuth = () => {
     const [phone , setPhone] = useState("");
     const [otp , setOtp] = useState("");
     const [isSentOtp , setIsSentOtp] = useState(false);
-    const {restart , getFormattedTime , isExpired} = useCountdown(10); //set duration on 10 seconds for test
+    const {restart , getFormattedTime , isExpired} = useCountdown(120);
     const navigate = useNavigate();
     const {refreshUser} = useContext(AuthContext);
 
@@ -27,7 +27,7 @@ export const useAuth = () => {
         if (!validate(sendOtpSchema, {phone})) return;
 
         const data = await authService.sendOtp(phone);
-        console.log('[sendOtp]',data);
+        toast.success("کد ارسال شد");
 
         setIsSentOtp(true);
 
@@ -37,7 +37,6 @@ export const useAuth = () => {
     const resendOtp = async ()=>{
         setOtp("");
         const data = await authService.sendOtp(phone);
-        console.log('[ResendOtp]',data);
 
         restart();
         toast.success("کد جدید ارسال شد");
@@ -47,7 +46,6 @@ export const useAuth = () => {
         if (!validate(verifyOtpSchema,{phone ,otp})) return;
 
         const data = await authService.verifyOtp(phone, otp);
-        console.log('[verifyOtp]',data);
 
         return data;
     };
