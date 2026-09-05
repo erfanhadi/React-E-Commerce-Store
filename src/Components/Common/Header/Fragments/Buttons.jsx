@@ -18,7 +18,7 @@ const Buttons = () => {
       </Link>
       {
         isLoading ? (
-          <span>در حال بارگذاری</span>
+          <span className="text-[#2A2D53] border rounded-2xl">در حال بارگذاری</span>
         ) : user ? <Link to="/profile" className="bg-[#2A2D53]">پنل کاربری</Link> : (
           <Link to="/auth" className="bg-[#2A2D53]">
             ورود | ثبت نام
