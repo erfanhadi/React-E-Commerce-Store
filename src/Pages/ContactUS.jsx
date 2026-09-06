@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { contactUsSchema } from "../validators/contactus";
 import { validate } from "../validators";
 import useContactUs from "../lib/Hooks/useContactUs";
+import Maps from "../Components/Templates/ContactUS/Maps";
 
 const ContactUSPage = () => {
   const { form, isSubmitting, changeHandler, submitHandler } = useContactUs({
@@ -106,7 +107,7 @@ const ContactUSPage = () => {
           description="شما می‌توانید به صورت حضوری به یکی از دفاتر رسمی شاپینو مراجعه کنید و با همکاران ما در ارتباط باشید."
         />
 
-        {/* <Maps /> */}
+        <Maps />
       </div>
     </main>
   );
