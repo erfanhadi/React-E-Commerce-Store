@@ -1,5 +1,6 @@
 import React from 'react'
-import ModeratorLinks from '../../../Pages/Dashboard/ModeratorLinks'
+import ModeratorLinks from '../../Templates/Dashboard/ModeratorLinks'
+import Logout from '../../Templates/Dashboard/logout'
 
 function index() {
     return (
@@ -9,7 +10,7 @@ function index() {
                     <ModeratorLinks />
                 </main>
             </div>
-            {/* <Logout /> */}
+            <Logout />
         </aside>
     )
 }
