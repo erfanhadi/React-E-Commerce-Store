@@ -31,3 +31,14 @@ export const getMe = async () => {
     );
     return data;
 };
+
+export const logout = async () => {
+    const {data} = await axios.post(
+        "https://shopino.iran.liara.run/v1/auth/logout",
+        {},
+        {
+            withCredentials: true,
+        },
+    );
+    return data;
+};
