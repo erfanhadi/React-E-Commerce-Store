@@ -11,6 +11,9 @@ import AppLayout from "../Components/Layouts/AppLayout.jsx";
 import AuthPage from "../Pages/Auth.jsx";
 import AuthLayout from "../Components/Layouts/AuthLayout.jsx";
 import CMSLayout from "../Components/Layouts/CMSLayout.jsx";
+import * as AuthService from "../services/auth.service.js";
+import Forbidden from "../Pages/Forbidden.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -23,28 +26,42 @@ const router = createBrowserRouter([
       { path: "cart", element: <CartPage /> },
       { path: "product/:productID", element: <ProductPage /> },
       { path: "blog/:blogID", element: <BlogPage /> },
-      
+
       {
-        path: "auth", 
+        path: "auth",
         element: <AuthLayout />,
         children: [
-          {index: true, element: <AuthPage/>},
+          { index: true, element: <AuthPage /> },
         ]
       },
+
+      {path: "forbidden",element: <Forbidden/>},
     ],
   },
 
   {
     path: "/dashboard",
-    element: <CMSLayout/>,
+    element: <CMSLayout />,
     children: [
       {
         path: "moderator",
+        loader: async () => {
+          try {
+            const { data } = await AuthService.getMe();
+            if (!data.user.roles.includes("ADMIN")) {
+              return redirect("/forbidden");
+            };
+
+            return data.user;
+          } catch (err) {
+            return redirect("/auth");
+          }
+        },
         children: [
-          {index: true , loader: () => redirect("home")},
-          {path: "home" , element: <div>Home page</div>},
-          {path: "orders" , element: <div>Orders page</div>},
-          {path: "products" , element: <div>Products page</div>},
+          { index: true, loader: () => redirect("home") },
+          { path: "home", element: <div>Home page</div> },
+          { path: "orders", element: <div>Orders page</div> },
+          { path: "products", element: <div>Products page</div> },
         ]
       },
     ]
