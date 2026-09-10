@@ -1,9 +1,14 @@
-import React from 'react'
+import ModeratorProductsTable from "../../../../Components/Templates/Dashboard/templates/moderator/products/ModeratorProductsTable";
+import PageLabel from "../../../../Components/Templates/Dashboard/ui/PageLabel";
 
-function page() {
+
+function ModeratorProducts() {
     return (
-        <div>page</div>
+        <div className="space-y-10">
+            <PageLabel label="مدیریت محصولات وبسایت" />
+            <ModeratorProductsTable />
+        </div>
     )
 }
 
-export default page
+export default ModeratorProducts;

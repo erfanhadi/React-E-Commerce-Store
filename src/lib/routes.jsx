@@ -14,6 +14,7 @@ import CMSLayout from "../Components/Layouts/CMSLayout.jsx";
 import * as AuthService from "../services/auth.service.js";
 import Forbidden from "../Pages/Forbidden.jsx";
 import NotFound from "../Pages/NotFound.jsx";
+import ModeratorProducts from "../Pages/Dashboard/moderator/products/page.jsx";
 
 
 const router = createBrowserRouter([
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
           { index: true, loader: () => redirect("home") },
           { path: "home", element: <div>Home page</div> },
           { path: "orders", element: <div>Orders page</div> },
-          { path: "products", element: <div>Products page</div> },
+          { path: "products", element: <ModeratorProducts/> },
         ]
       },
     ]
