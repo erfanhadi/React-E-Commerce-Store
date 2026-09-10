@@ -1,11 +1,6 @@
 import { Link } from "react-router";
 import SectionTitle from "../Components/Common/SectionTitle";
 import InputField from "../Components/Templates/ContactUS/InputField";
-import { useState } from "react";
-import axios from "axios";
-import { toast } from "sonner";
-import { contactUsSchema } from "../validators/contactus";
-import { validate } from "../validators";
 import useContactUs from "../lib/Hooks/useContactUs";
 import Maps from "../Components/Templates/ContactUS/Maps";
 
