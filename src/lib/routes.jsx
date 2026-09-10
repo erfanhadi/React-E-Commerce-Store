@@ -13,6 +13,7 @@ import AuthLayout from "../Components/Layouts/AuthLayout.jsx";
 import CMSLayout from "../Components/Layouts/CMSLayout.jsx";
 import * as AuthService from "../services/auth.service.js";
 import Forbidden from "../Pages/Forbidden.jsx";
+import NotFound from "../Pages/NotFound.jsx";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       },
 
       {path: "forbidden",element: <Forbidden/>},
+      {path: "*",element: <NotFound/>},
     ],
   },
 
