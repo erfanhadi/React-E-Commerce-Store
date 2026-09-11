@@ -47,7 +47,7 @@ const ModeratorProductsTable = () => {
           <TableCell>
             <Link
               to="/moderator/seller/shopName"
-              className="flex min-w-max underline underline-offset-2 text-blue-500 items-center  gap-1 flex items-center"
+              className="flex min-w-max underline underline-offset-2 text-blue-500  gap-1 items-center"
             >
               <BsShop />
               <span>شاپینو</span>
