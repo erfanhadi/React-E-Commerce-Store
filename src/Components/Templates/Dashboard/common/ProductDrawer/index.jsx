@@ -39,7 +39,7 @@ const ProductDrawer = ({
           type="number"
         />
         <ProductDrawerInput
-          label="درصد تخفیف (%)"
+          label="موجودی محصول"
           placeholder="موجودی محصول (عدد)"
           onChange={() => {}}
           type="number"
