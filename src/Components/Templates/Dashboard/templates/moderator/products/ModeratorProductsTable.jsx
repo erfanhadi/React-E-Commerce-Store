@@ -78,7 +78,7 @@ const ModeratorProductsTable = () => {
               <span>منتشر شده</span>
             </TableCell>
             <TableCell>
-              <ManageProductDropdown />
+              {/* <ManageProductDropdown /> */}
             </TableCell>
           </TableRow>
         </TableBody>
