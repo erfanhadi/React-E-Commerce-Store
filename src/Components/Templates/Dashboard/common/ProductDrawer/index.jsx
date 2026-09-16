@@ -1,6 +1,7 @@
 import React from "react";
 import Drawer from "../Drawer";
 import ProductDrawerInput from "./ProductDrawerInput";
+import useCategories from "../../../../../lib/Hooks/useCategories";
 
 // mode: CREATE | EDIT
 const ProductDrawer = ({
@@ -9,6 +10,8 @@ const ProductDrawer = ({
   initialValues,
   mode = "CREATE",
 }) => {
+  const { isLoading: categoriesIsLoading, categories } = useCategories();
+
   return (
     <Drawer
       className=""
@@ -56,6 +59,23 @@ const ProductDrawer = ({
           onChange={() => {}}
           type="number"
         />
+
+        <div>
+          <label
+            htmlFor=""
+            className="text-sm font-medium text-zinc-700 mb-2 block"
+          >
+            دسته بندی
+          </label>
+          {categoriesIsLoading ? (
+            <p className="text-xs text-zinc-400">
+              درحال بارگذاری دسته بندی ها...
+            </p>
+          ) : (
+            <div>لیست دسته بندی ها</div>
+            // <Categories categories={categories} />
+          )}
+        </div>
 
         <div>
           <label htmlFor="product-details"> توضیحات محصول </label>

@@ -13,7 +13,6 @@ import { useState } from "react";
 import ProductDrawer from "../../../common/ProductDrawer";
 
 const ModeratorProductsTable = () => {
-
   const [isDrawerShow, setIsDrawerShow] = useState(false);
   const toggleDrawer = () => setIsDrawerShow((prev) => !prev);
 
@@ -85,7 +84,9 @@ const ModeratorProductsTable = () => {
         </TableBody>
       </Table>
 
-      <ProductDrawer isOpen={isDrawerShow} onToggle={toggleDrawer} />
+      {isDrawerShow && (
+        <ProductDrawer isOpen={isDrawerShow} onToggle={toggleDrawer} />
+      )}
     </>
   );
 };
