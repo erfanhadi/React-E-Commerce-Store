@@ -2,6 +2,7 @@ import React from "react";
 import Drawer from "../Drawer";
 import ProductDrawerInput from "./ProductDrawerInput";
 import useCategories from "../../../../../lib/Hooks/useCategories";
+import CascadeCategories from "./CascadeCategories";
 
 // mode: CREATE | EDIT
 const ProductDrawer = ({
@@ -72,8 +73,7 @@ const ProductDrawer = ({
               درحال بارگذاری دسته بندی ها...
             </p>
           ) : (
-            <div>لیست دسته بندی ها</div>
-            // <Categories categories={categories} />
+            <CascadeCategories categories={categories} />
           )}
         </div>
 
