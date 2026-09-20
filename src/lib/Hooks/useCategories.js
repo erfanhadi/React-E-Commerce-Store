@@ -14,8 +14,6 @@ const useCategories = () => {
                 const res = await getAllCategories();
 
                 if (mounted) {
-                    console.log(res);
-
                     setCategories(res?.data?.categories || []);
                 }
 
