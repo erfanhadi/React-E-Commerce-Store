@@ -1,6 +1,6 @@
 import React from 'react'
 import ModeratorLinks from '../../Templates/Dashboard/ModeratorLinks'
-import Logout from '../../Templates/Dashboard/logout'
+import Logout from '../../Templates/Dashboard/Logout'
 
 function index() {
     return (
