@@ -3,7 +3,7 @@ import { useState } from "react";
 const emptySeller = {
     id: "",
     price: "",
-    stock: "",
+    stock: 0,
 };
 
 const emptyPair = { key: "", value: "" };
@@ -76,6 +76,48 @@ const useProductForm = () => {
 
     const setImages = (files) => setField("images", files);
 
+    const buildFormData = () => {
+        const formData = new FormData();
+
+        formData.append("name", form.name);
+        formData.append("slug", form.slug);
+        formData.append("description", form.description);
+        formData.append("categoryId", selectedCategory || "");
+
+        const sellersPayload = form.sellers
+            .filter((seller) => seller.id && seller.price)
+            .map((seller) => ({
+                id: seller.id,
+                price: Number(seller.price),
+                stock: Number(seller.stock),
+            }));
+
+        formData.append("sellers",JSON.stringify(sellersPayload));
+
+        const pairsToObject = (list) => {
+            return list.reduce((obj, { key, value }) =>{
+                if(key.trim()) obj[key.trim()] = value;
+                return obj;
+            }, {});
+        };
+
+        formData.append(
+            "filterValues",
+            JSON.stringify(pairsToObject(form.filterValues)),
+        );
+
+        formData.append(
+            "customFields",
+            JSON.stringify(pairsToObject(form.customFields)),
+        );
+
+        form.images.forEach((image) => {
+            formData.append("images",image);
+        });
+
+        return formData;
+    };
+
     const resetForm = () => {
         setForm({
             name: "",
@@ -102,6 +144,7 @@ const useProductForm = () => {
         removePair,
         updatePair,
         setImages,
+        buildFormData,
         resetForm,
     };
 };
