@@ -15,8 +15,8 @@ const ProductDrawer = ({
   mode = "CREATE",
 }) => {
   const { isLoading: categoriesIsLoading, categories } = useCategories();
-  const { error, setError } = useState(null);
-  const { isSubmitting, setIsSubmitting } = useState(false);
+  const [ error, setError ] = useState(null);
+  const [ isSubmitting, setIsSubmitting] = useState(false);
   const {
     form,
     selectedCategory,
@@ -57,8 +57,8 @@ const ProductDrawer = ({
       await createProduct(buildFormData());
       resetForm();
       toast.success("محصول با موفقیت ایجاد شد");
-    } catch (err) {
-      setError(err.response?.data?.messege || "خطایی رخ داده است");
+    } catch (error) {
+      setError(error.response?.data?.messege || "خطایی رخ داده است");
     }
 
     setIsSubmitting(false);
