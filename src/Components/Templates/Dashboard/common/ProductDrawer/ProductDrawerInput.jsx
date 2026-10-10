@@ -18,6 +18,8 @@ const ProductEditInput = ({
         {...props}
         className="w-full h-10 text-sm rounded-md outline-none primary-border px-3 mt-2"
         placeholder={placeholder || "لطفا این فیلد را تکمیل نمائید.."}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );

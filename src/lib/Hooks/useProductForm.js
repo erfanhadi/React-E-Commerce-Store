@@ -135,7 +135,7 @@ const useProductForm = () => {
     return {
         form,
         selectedCategory,
-        setSelectedCategory,
+        handleCategoryChange,
         setField,
         addSeller,
         removeSeller,
