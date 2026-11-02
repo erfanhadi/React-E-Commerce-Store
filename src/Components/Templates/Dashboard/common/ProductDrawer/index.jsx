@@ -6,6 +6,7 @@ import CascadeCategories from "./CascadeCategories";
 import useProductForm from "../../../../../lib/Hooks/useProductForm";
 import createProduct from "../../../../../services/product.service";
 import { toast } from "sonner";
+import DynamicKeyValueFeilds from "./DynamicKeyValueFeilds";
 
 // mode: CREATE | EDIT
 const ProductDrawer = ({
@@ -132,6 +133,22 @@ const ProductDrawer = ({
             />
           )}
         </div>
+
+        <DynamicKeyValueFeilds 
+          title="ویژگی های فیلتری"
+          items={form.filterValues}
+          onAdd={() => addPair("filterValues")}
+          onRemove={(index) => removePair("filterValues", index)}
+          onChange={(index , key , value) => updatePair("filterValues", index , key , value)}
+        />
+
+        <DynamicKeyValueFeilds 
+          title="ویژگی های سفارشی"
+          items={form.customFields}
+          onAdd={() => addPair("customFields")}
+          onRemove={(index) => removePair("customFields", index)}
+          onChange={(index , key , value) => updatePair("customFields", index , key , value)}
+        />
 
         <div>
           <label htmlFor="product-details"> توضیحات محصول </label>
