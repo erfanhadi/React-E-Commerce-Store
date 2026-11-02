@@ -2,14 +2,14 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const api = axios.create({
-    baseURL: "https://shopino.iran.liara.run/v1",
+    baseURL: "https://shopino.pachim.run/v1",
     withCredentials: true,
 
     headers: {
         "Content-Type": "application/json",
     },
 
-    timeout: 5000,
+    timeout: 20000,
 });
 
 api.interceptors.response.use(
