@@ -1,6 +1,7 @@
 import { BiPlus } from 'react-icons/bi'
 import { HiX } from 'react-icons/hi'
 import AsyncSelect from 'react-select/async'
+import {searchSellers} from '../../../../../services/sellers.service'
 
 function SellerFields({
     sellers,
@@ -8,6 +9,17 @@ function SellerFields({
     onChange,
     onRemove
 }) {
+    const loadSellersOptions = async (inputValue) => {
+        const sellers = await searchSellers(inputValue);
+
+        console.log(sellers);
+
+        return sellers.map((seller) => ({
+            value: seller._id,
+            label: seller.name,
+        }));
+    };
+
     return (
         <div>
             <div className="flex items-center justify-between mb-2">
@@ -25,6 +37,14 @@ function SellerFields({
                 <div key={index} className="flex items-center gap-2">
                     <div>
                         <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={loadSellersOptions}
+                            value={seller.info}
+                            onChange={(option) => {
+                                onChange(index, "info", option);
+                                onChange(index, "id", option);
+                            }}
                             loadingMessage={() => "در حال جستجو ..."}
                             noOptionsMessage={() => "فروشنده‌ای یافت نشد"}
                             placeholder="جستجوی فروشنده"
