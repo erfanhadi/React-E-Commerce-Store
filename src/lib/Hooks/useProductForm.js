@@ -38,7 +38,7 @@ const useProductForm = () => {
     const removeSeller = (index) => {
         setForm((prev) => ({
             ...prev,
-            sellers: prev.sellers.filter(_, (i) => i !== index),
+            sellers: prev.sellers.filter((_,i) => i !== index),
         }));
     };
 

@@ -7,6 +7,7 @@ import useProductForm from "../../../../../lib/Hooks/useProductForm";
 import createProduct from "../../../../../services/product.service";
 import { toast } from "sonner";
 import DynamicKeyValueFeilds from "./DynamicKeyValueFeilds";
+import SellerFields from "./SellerFields";
 
 // mode: CREATE | EDIT
 const ProductDrawer = ({
@@ -133,6 +134,13 @@ const ProductDrawer = ({
             />
           )}
         </div>
+
+        <SellerFields 
+          sellers={form.sellers}
+          onAdd={addSeller}
+          onChange={updateSeller}
+          onRemove={removeSeller}
+        />
 
         <DynamicKeyValueFeilds 
           title="ویژگی های فیلتری"
