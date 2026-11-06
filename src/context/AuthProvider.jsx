@@ -1,57 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import AuthContext from './AuthContext'
-import * as AuthService from "./../services/auth.service"
+import React, { useCallback, useEffect, useState } from 'react';
+import AuthContext from './AuthContext';
+import * as AuthService from './../services/auth.service';
 
-function AuthProvider({ children }) {
+function AuthProvider({ children, autoLogin = false }) {
     const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(null);
+    const [isLoading, setIsLoading] = useState(autoLogin);
 
-    const initAuth = async () => {
+    const getCurrentUser = useCallback(async () => {
         try {
             setIsLoading(true);
+
             const response = await AuthService.getMe();
-
             setUser(response.data.user);
-        } catch (err) {
-            console.error('[GetMe]', err);
-
+        } catch (error) {
+            console.error('[GetMe]', error);
             setUser(null);
         } finally {
             setIsLoading(false);
         }
-    };
-
-    useEffect(() => {
-        initAuth();
     }, []);
 
-    const Logout = async () => {
+    const logout = useCallback(async () => {
         try {
             setIsLoading(true);
-            const response = await AuthService.logout();
-
-            console.log(response);
+            await AuthService.logout();
         } catch (error) {
-            console.log('[logout] ->',error);
-            
-        }finally {
+            console.error('[Logout]', error);
+        } finally {
             setUser(null);
             setIsLoading(false);
         }
-    };
+    }, []);
 
-    const refreshUser = async () => {
-        initAuth();
-    };
+    useEffect(() => {
+        if (autoLogin) {
+            getCurrentUser();
+        }
+    }, [autoLogin, getCurrentUser]);
 
     const value = {
         user,
         isLoading,
-        Logout,
-        refreshUser,
+        getCurrentUser,
+        logout
     };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-};
+    return (
+        <AuthContext.Provider value={value}>
+            {children}
+        </AuthContext.Provider>
+    );
+}
 
 export default AuthProvider;
