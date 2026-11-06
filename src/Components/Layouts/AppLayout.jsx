@@ -6,7 +6,7 @@ import AuthProvider from "../../context/AuthProvider";
 
 const AppLayout = () => {
   return (
-    <AuthProvider>
+    <AuthProvider autoLogin={true}>
       <Toaster position="top-right" richColors toastOptions={{
         style: {
           fontFamily: "IRANSansX",

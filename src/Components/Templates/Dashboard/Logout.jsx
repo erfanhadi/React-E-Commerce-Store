@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 
 function Logout() {
-    const { Logout , refreshUser } = useContext(AuthContext);
+    const { logout , getCurrentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = async ()=>{
@@ -15,7 +15,7 @@ function Logout() {
         } catch (error) {
             //codes
         }finally{
-            refreshUser();
+            getCurrentUser();
             navigate("/auth" , { replace: true });
             toast.warning("با موفقیت از حساب کاربری خارج شدید")
         }
