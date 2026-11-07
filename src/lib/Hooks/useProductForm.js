@@ -13,7 +13,7 @@ const useProductForm = () => {
         name: "",
         slug: "",
         description: "",
-        images: [],
+        images: [1],
         sellers: [{ ...emptySeller }],
         filterValues: [{ ...emptyPair }],
         customFields: [{ ...emptyPair }],

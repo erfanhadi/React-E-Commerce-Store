@@ -8,6 +8,7 @@ import createProduct from "../../../../../services/product.service";
 import { toast } from "sonner";
 import DynamicKeyValueFeilds from "./DynamicKeyValueFeilds";
 import SellerFields from "./SellerFields";
+import ImageUploadField from "./ImageUploadField";
 
 // mode: CREATE | EDIT
 const ProductDrawer = ({
@@ -157,6 +158,11 @@ const ProductDrawer = ({
           onRemove={(index) => removePair("customFields", index)}
           onChange={(index , key , value) => updatePair("customFields", index , key , value)}
         />
+
+          <ImageUploadField
+            files={form.images}
+            onChange={setImages}
+          />
 
         <div>
           <label htmlFor="product-details"> توضیحات محصول </label>
