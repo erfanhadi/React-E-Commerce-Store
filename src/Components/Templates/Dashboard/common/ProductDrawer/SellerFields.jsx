@@ -12,8 +12,6 @@ function SellerFields({
     const loadSellersOptions = async (inputValue) => {
         const sellers = await searchSellers(inputValue);
 
-        console.log(sellers);
-
         return sellers.map((seller) => ({
             value: seller._id,
             label: seller.name,
