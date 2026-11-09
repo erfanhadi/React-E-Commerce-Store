@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CascadeCategories({ categories }) {
+function CascadeCategories({ categories , onChange }) {
     const [path , setPath] = useState([]);
     
     const levels = [categories , ...path.map(cat => cat.subCategories || [] )];
@@ -11,6 +11,9 @@ function CascadeCategories({ categories }) {
 
         const newPath = [...path.slice(0 , levelIndex), node];
         setPath(newPath);
+
+        const isLeaf = !node.subCategories || node.subCategories.length === 0;
+        onChange(isLeaf ? node : null);
     };
 
     return (

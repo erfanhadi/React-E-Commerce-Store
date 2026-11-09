@@ -60,6 +60,7 @@ const ProductDrawer = ({
       await createProduct(buildFormData());
       resetForm();
       toast.success("محصول با موفقیت ایجاد شد");
+      onToggle();
     } catch (error) {
       setError(error.response?.data?.messege || "خطایی رخ داده است");
     }
@@ -176,6 +177,8 @@ const ProductDrawer = ({
           ></textarea>
         </div>
       </div>
+
+      { error && <p className="text-red-500 text-xs">{error}</p>}
 
       <div className="mt-5 flex items-center justify-end gap-2">
         <button className="px-4 py-2 rounded-md bg-red-500/10 text-red-500 hover:bg-red-500/15 ">

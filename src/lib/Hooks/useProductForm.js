@@ -82,7 +82,7 @@ const useProductForm = () => {
         formData.append("name", form.name);
         formData.append("slug", form.slug);
         formData.append("description", form.description);
-        formData.append("categoryId", selectedCategory || "");
+        formData.append("subCategory", selectedCategory._id || "");
 
         const sellersPayload = form.sellers
             .filter((seller) => seller.id && seller.price)
