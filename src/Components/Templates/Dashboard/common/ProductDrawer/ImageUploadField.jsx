@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiX } from "react-icons/hi";
 import { BiImageAdd } from "react-icons/bi";
 
 const MAX_IMAGE = 10;
 
 function ImageUploadField({ files, onChange }) {
+    const [previewUrls , setPreviewUrls] = useState([]);
     const isFull = files.length >= MAX_IMAGE;
     const inputRef = useRef(null);
 
@@ -19,6 +20,16 @@ function ImageUploadField({ files, onChange }) {
     const removeFile = (index) => {
         onChange(files.filter((_,i) => i !== index));
     };
+
+    useEffect(() => {
+        const urls = files.map((file) => URL.createObjectURL(file));
+
+        setPreviewUrls(urls);
+
+        return () => {
+            urls.map(url => URL.revokeObjectURL(url))
+        }
+    }, [files]);
 
     return (
         <div>
@@ -41,13 +52,13 @@ function ImageUploadField({ files, onChange }) {
             />
 
             <div className="grid grid-cols-4 gap-2">
-                {files.map((file, index) => (
+                {previewUrls.map((url, index) => (
                     <div
                         key={index}
                         className="relative aspect-square rounded-md overflow-hidden primary-border group"
                     >
                         <img
-                            src={URL.createObjectURL(file)}
+                            src={url}
                             className="w-full h-full object-cover"
                             alt=""
                         />
