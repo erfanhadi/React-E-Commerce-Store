@@ -11,10 +11,13 @@ import { locateImagePath } from "../../../../../../lib/helpers";
 import { BiPlus } from "react-icons/bi";
 import { useState } from "react";
 import ProductDrawer from "../../../common/ProductDrawer";
+import { useProducts } from "../../../../../../lib/Hooks/useProducts";
 
 const ModeratorProductsTable = () => {
   const [isDrawerShow, setIsDrawerShow] = useState(false);
   const toggleDrawer = () => setIsDrawerShow((prev) => !prev);
+
+  const { products,pagination,page, setPage, isLoading, error } = useProducts();
 
   return (
     <>

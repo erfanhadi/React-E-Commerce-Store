@@ -16,4 +16,10 @@ const createProduct = async (formData) => {
     }
 };
 
+export const getAllProducts = async (params) => {
+    const { data } = await api.get('/products' , {params});
+
+    return data;
+};
+
 export default createProduct;
