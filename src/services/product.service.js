@@ -2,7 +2,6 @@ import api from "./api";
 
 const createProduct = async (formData) => {
     try {
-        console.log([...formData.entries()]);
 
         const { data } = await api.post("/products", formData, {
             headers: {
